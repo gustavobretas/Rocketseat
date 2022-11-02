@@ -1,2 +1,2 @@
-# Rockeatseat
-Rockectseat Bootcamps
+# Rocketseat
+Rocketseat Bootcamps
