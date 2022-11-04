@@ -8,6 +8,7 @@ import usersAvatarExampleImg from '../assets/users-avatar-example.png';
 import iconCheckImg from '../assets/icon-ckeck.svg';
 import { api } from '../lib/axios';
 import { FormEvent, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface HomeProps {
   poolsCount: number;
@@ -17,33 +18,36 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
   const [poolTitle, setPoolTitle] = useState('');
-
+  
   async function createPool(event: FormEvent) {
     event.preventDefault();
 
-    try {
-      const response = await api.post('/pools/create', {
-        title: poolTitle,
-      });
+    const promisseSavePool = api.post('/pools/create', {
+      title: poolTitle,
+    });
 
-      const { code } = response.data;
-
-      await navigator.clipboard.writeText(code);
-
-      alert('O Bolão foi Criado com Sucesso. Copiado para a área de transferência!');
-
-      setPoolTitle('');
-    } catch (error) {
-      console.log(error);
-      alert('Falha ao criar o Bolão. Tente novamente.');
-    }
+    await toast.promise(promisseSavePool, {
+      loading: 'Salvando...',
+      success: (response) => {
+        navigator.clipboard.writeText(response.data.code);
+        return 'Bolão criado com sucesso!'
+      },
+      error: (error) => {
+        console.log(error);
+        return 'Ocorreu um erro ao tentar criar o Bolão. Tente novamente.'},
+    })
+    
+    setPoolTitle('');
   }
 
   return (
     <div className='max-w-6xl h-screen mx-auto grid grid-cols-2 gap-28 items-center'>
+      <Toaster position="top-right" reverseOrder={false} 
+        toastOptions={{
+          duration: 2000,
+        }} />
       <main>
         <Image src={logoImg} alt="Logo do Site" quality={100} />
-
         <h1 className='mt-14 text-white text-5xl font-bold leading-tight'>
           Crie seu próprio bolão da copa e compartilhe entre amigos!
         </h1>
