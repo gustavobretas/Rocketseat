@@ -22,7 +22,7 @@ export function SignIn() {
             />
 
             <Text color="white" textAlign="center" mt={4}>
-                Não utilizamos nenhuma inforação além {'\n'} 
+                Não utilizamos nenhuma informação além {'\n'} 
                 do seu e-mail para criação da sua conta.
             </Text>
         </Center>
