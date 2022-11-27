@@ -1,11 +1,49 @@
-import { Heading, Text, VStack } from "native-base";
+import { Heading, Text, Toast, useToast, VStack } from "native-base";
 import { Header } from "../components/Header";
+import { useState } from "react";
 
 import Logo from '../assets/logo.svg';
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
+import { api } from "../services/api";
 
 export function New() {
+    const [title, setTitle] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    async function handlePollCreate() {
+        if (!title.trim()) {
+            return Toast.show({
+                title: "Informe o Nome do Bolão",
+                placement: "top",
+                bgColor: "red.500",
+            });
+        }
+        try {
+            setIsLoading(true);
+
+            await api.post('/pools/create', { title });
+            
+            Toast.show({
+                title: "Bolão Criado com Sucesso!",
+                placement: "top",
+                bgColor: "green.500",
+            });
+
+            setTitle('');
+
+        } catch (error) {
+            console.log(error);
+            Toast.show({
+                title: "Não foi possível criar o Bolão",
+                placement: "top",
+                bgColor: "red.500",
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return (
         <VStack flex={1} bgColor="gray.900">
             <Header title="Criar novo Bolão" showBackButton />
@@ -16,9 +54,12 @@ export function New() {
                     Crie seu próprio bolão da copa {'\n'} e compartilhe entre os amigos.
                 </Heading>
 
-                <Input mb={2} placeholder="Qual o nome do seu bolão?" />
+                <Input mb={2} placeholder="Qual o nome do seu bolão?" 
+                    onChangeText={setTitle}
+                    value={title}
+                />
 
-                <Button title="CRIAR MEU BOLÃO" />
+                <Button title="CRIAR MEU BOLÃO" onPress={handlePollCreate} isLoading={isLoading}/>
 
                 <Text color={"gray.200"} fontSize="sm" textAlign={"center"} px={10} mt={4}>
                     Após criar seu bolão, você receberá um código único para convidar outras pessoas.
