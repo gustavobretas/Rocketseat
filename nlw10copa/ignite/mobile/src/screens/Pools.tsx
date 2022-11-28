@@ -11,7 +11,7 @@ import { api } from "../services/api";
 import { EmptyPoolList } from "../components/EmptyPoolList";
 
 export function Pools() {
-    const navigation = useNavigation();
+    const { navigate } = useNavigation();
     const [isLoading, setIsLoading] = useState(true);
     const [polls, setPolls] = useState<PoolCardPros[]>([]);
 
@@ -44,18 +44,18 @@ export function Pools() {
                 <Button
                     title="BUSCAO BOLÃO POR CÓDIGO"
                     leftIcon={<Icon as={Octicons} name="search" size="md" color="black" mr={2} />}
-                    onPress={() => navigation.navigate('find')}
+                    onPress={() => navigate('find')}
                 />
             </VStack>
 
             {isLoading ? <Loading /> : <FlatList
                 data={polls}
                 keyExtractor={item => item.id}
-                renderItem={({ item }) => <PoolCard data={item} />}
-                px={5}
+                renderItem={({ item }) => <PoolCard data={item} onPress={() => navigate("details", {id: item.id})}/>}
                 showsVerticalScrollIndicator={false}
                 _contentContainerStyle={{ pb: 10 }}
                 ListEmptyComponent={() => (<EmptyPoolList />)}
+                px={5}
             />
             }
         </VStack>
