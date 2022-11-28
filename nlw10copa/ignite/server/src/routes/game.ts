@@ -9,13 +9,13 @@ export async function gameRoutes(fastify : FastifyInstance) {
         return { count };
     });
 
-    fastify.get('/pools/:id/games', async (request) => {
+    fastify.get('/pools/:id/games', { onRequest: [authenticate] }, async (request) => {
         const getPollParams = z.object({
             id: z.string(),
         });
 
         const { id } = getPollParams.parse(request.params);
-
+        
         const games = await prisma.game.findMany({
             orderBy: {
                 date: 'desc',

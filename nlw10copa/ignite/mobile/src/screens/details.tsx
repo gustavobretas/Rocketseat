@@ -9,6 +9,8 @@ import { Loading } from "../components/loading";
 import { PoolCardPros } from "../components/PoolCard";
 import { PoolHeader } from "../components/PoolHeader";
 import { Option } from "../components/Option";
+import { Guesses } from "../components/Guesses";
+
 import { api } from "../services/api";
 
 interface RouteParams {
@@ -67,7 +69,7 @@ export function Details() {
                 <VStack px={5} flex={1} >
                     <PoolHeader data={pollDetails}/>
 
-                    <HStack bgColor={"gray.800"} p={1} rounded={5}>
+                    <HStack bgColor={"gray.800"} p={1} rounded={5} mb={5}>
                          <Option title="Meus Palpites" 
                             isSelected={optionSelected === "guesses"} 
                             onPress={() => setOptionSelected("guesses")}/>
@@ -75,6 +77,8 @@ export function Details() {
                             isSelected={optionSelected === "ranking"} 
                             onPress={() => setOptionSelected("ranking")}/>
                     </HStack>
+
+                    <Guesses poolId={pollDetails.id} code={pollDetails.code}/>
                 </VStack> 
                 : 
                 <EmptyMyPoolList code={pollDetails.code}/>
