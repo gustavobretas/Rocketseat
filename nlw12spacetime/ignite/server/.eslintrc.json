@@ -1,5 +1,15 @@
 {
-    "extends":[
-        "@rocketseat/eslint-config/node"
-    ]
-}
+    "extends": [
+      "@rocketseat/eslint-config/node"
+    ],
+    "rules": {
+      "camelcase": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto",
+          "semi": false          
+        }
+      ]
+    }
+  }
