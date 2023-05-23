@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "NLW12",
-    "slug": "NLW Spacetime",
+    "slug": "NLWSpacetime",
+    "scheme": "nlwspacetime",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
