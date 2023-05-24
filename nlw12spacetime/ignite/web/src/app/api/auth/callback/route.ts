@@ -1,5 +1,6 @@
 import { api } from '@/lib/api'
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.nextUrl)
@@ -19,7 +20,11 @@ export async function GET(request: NextRequest) {
     },
   )
 
-  const { token } = registerResponse.data
+  const tokenSchema = z.object({
+    token: z.string(),
+  })
+
+  const { token } = tokenSchema.parse(registerResponse.data)
 
   const redirectUrl = new URL(redirectTo, request.url)
 

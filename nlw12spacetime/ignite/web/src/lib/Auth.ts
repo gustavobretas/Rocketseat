@@ -1,5 +1,4 @@
 import decode from 'jwt-decode'
-import { cookies } from 'next/headers'
 
 interface User {
   sub: string
@@ -7,13 +6,14 @@ interface User {
   avatarUrl: string
 }
 
-export function getUser() {
-  const token = cookies().get('token')?.value
-  if (!token) {
-    throw new Error('Unauthenticated')
+export function getUser(token: string): User {
+  try {
+
+    const user: User = decode(token)
+
+    return user
+    
+  } catch (error) {
+    return <User>{}
   }
-
-  const user: User = decode(token)
-
-  return user
 }
