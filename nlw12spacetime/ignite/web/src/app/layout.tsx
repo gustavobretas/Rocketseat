@@ -5,12 +5,9 @@ import {
   Bai_Jamjuree as BaiJamjuree,
 } from 'next/font/google'
 
-import { cookies } from 'next/headers'
-
 import { Copyright } from '@/components/Copyright'
 import { Hero } from '@/components/Hero'
 import { SignIn } from '@/components/SignIn'
-import { Profile } from '@/components/Profile'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto' })
 const baiJamjuree = BaiJamjuree({
@@ -26,7 +23,7 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-    return (
+  return (
     <html lang="en">
       <body
         className={`${roboto.className} ${baiJamjuree.className} bg-gray-900 font-sams text-gray-100`}
