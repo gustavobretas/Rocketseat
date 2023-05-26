@@ -4,7 +4,7 @@ import { getUser } from './lib/Auth'
 
 export async function middleware(request: NextRequest) {
   const { name } = getUser(request.cookies.get('token')?.value || '')
-  
+
   if (name === undefined) {
     return NextResponse.redirect(signInUrl, {
       headers: {
