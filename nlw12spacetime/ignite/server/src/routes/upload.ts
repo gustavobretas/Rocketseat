@@ -4,13 +4,14 @@ import { resolve, dirname } from 'node:path'
 import { createWriteStream, existsSync, mkdirSync } from 'node:fs'
 import { pipeline } from 'node:stream'
 import { promisify } from 'node:util'
-// import { z } from 'zod'
-// import axios from 'axios'
-// import { prisma } from '../lib/prisma'
 
 const pump = promisify(pipeline)
 
 export async function uploadRoutes(app: FastifyInstance) {
+  app.addHook('preHandler', async (request) => {
+    await request.jwtVerify()
+  })
+
   app.post('/upload', async (request, reply) => {
     const upload = await request.file({
       limits: {
@@ -43,6 +44,6 @@ export async function uploadRoutes(app: FastifyInstance) {
     const fullUrl = request.protocol.concat('://').concat(request.hostname)
     const fileUrl = new URL(`/uploads/${fileName}`, fullUrl).toString()
 
-    return { fileUrl }
+    return reply.status(201).send({ fileUrl })
   })
 }
