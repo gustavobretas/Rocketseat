@@ -6,6 +6,10 @@ import { FormEvent } from 'react'
 import { api } from '@/lib/api'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export function NewMemoryForm() {
   const router = useRouter()
@@ -15,11 +19,11 @@ export function NewMemoryForm() {
 
     const formData = new FormData(event.currentTarget)
 
-    const fileToUpload = formData.get('coverUrl')
-
     let coverUrl = ''
 
     const token = Cookie.get('token')
+
+    const fileToUpload = formData.get('coverUrl')
 
     if (fileToUpload) {
       const uploadFormData = new FormData()
@@ -47,6 +51,16 @@ export function NewMemoryForm() {
         },
       },
     )
+
+    MySwal.fire({
+      title: 'Sucesso!',
+      toast: true,
+      position: 'top-right',
+      icon: 'success',
+      timer: 1000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
 
     router.push('/')
   }
