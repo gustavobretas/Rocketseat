@@ -40,7 +40,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Copyright />
           </div>
           {/* Rigth */}
-          <div className="flex flex-col bg-stars bg-cover p-16">{children}</div>
+          <div className="flex max-h-screen flex-col overflow-y-scroll bg-stars bg-cover">
+            {children}
+          </div>
         </main>
       </body>
     </html>
