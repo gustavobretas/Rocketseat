@@ -8,11 +8,9 @@ interface User {
 
 export function getUser(token: string): User {
   try {
-
     const user: User = decode(token)
 
     return user
-    
   } catch (error) {
     return <User>{}
   }

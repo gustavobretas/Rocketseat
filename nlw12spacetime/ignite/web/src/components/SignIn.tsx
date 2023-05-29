@@ -5,11 +5,11 @@ import { getUser } from '@/lib/Auth'
 
 export function SignIn() {
   const { name, avatarUrl } = getUser(cookies().get('token')?.value || '')
-  
+
   if (name !== undefined) {
-    return (<Profile name={name} avatarUrl={avatarUrl} />)
+    return <Profile name={name} avatarUrl={avatarUrl} />
   }
-  
+
   return (
     // SignIn
     <a
