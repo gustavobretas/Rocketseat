@@ -10,7 +10,9 @@ import { authRoutes } from './routes/auth'
 import { uploadRoutes } from './routes/upload'
 import { resolve } from 'path'
 
-const app = fastify()
+const app = fastify({
+  logger: true,
+})
 
 app.register(multipart)
 app.register(fastifyStatic, {

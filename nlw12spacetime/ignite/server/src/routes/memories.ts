@@ -13,6 +13,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
         id: true,
         coverUrl: true,
         content: true,
+        createdAt: true,
       },
       where: {
         userId: request.user.sub,
@@ -25,7 +26,9 @@ export async function memoriesRoutes(app: FastifyInstance) {
       return {
         id: memory.id,
         coverUrl: memory.coverUrl,
+        content: memory.content,
         excerpt: memory.content.substring(0, 115).concat('...'),
+        createdAt: memory.createdAt,
       }
     })
   })

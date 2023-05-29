@@ -19,8 +19,8 @@ export async function uploadRoutes(app: FastifyInstance) {
       },
     })
 
-    if (!upload) {
-      return reply.status(400).send('No file added')
+    if (!upload || upload.filename === '') {
+      return reply.status(400).send('Missing File')
     }
 
     const mimeTypeRegex = /^image\/(jpeg|png)$|^video\/(mp4)$/
