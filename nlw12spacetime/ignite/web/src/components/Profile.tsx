@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export function Profile(props: { name: string, avatarUrl: string }) {
+export function Profile(props: { name: string; avatarUrl: string }) {
   return (
     // SignIn
     <div className="flex items-center gap-3 text-left">

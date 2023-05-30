@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-br'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, MoreHorizontal } from 'lucide-react'
 // import Cookie from 'js-cookie'
 
 dayjs.locale(ptBr)
@@ -44,9 +44,21 @@ export default async function Home() {
       {memories.map((memory) => {
         return (
           <div key={memory.id} className="space-y-4">
-            <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
-              {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
-            </time>
+            <div className="grid grid-cols-2">
+              <div>
+                <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
+                  {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
+                </time>
+              </div>
+              <div className="flex max-h-screen flex-col">
+                <Link
+                  href={`memories/${memory.id}`}
+                  className="flex items-center gap-2 self-end text-sm text-gray-200 hover:text-gray-100"
+                >
+                  <MoreHorizontal></MoreHorizontal>
+                </Link>
+              </div>
+            </div>
             <Image
               src={memory.coverUrl}
               width={592}
