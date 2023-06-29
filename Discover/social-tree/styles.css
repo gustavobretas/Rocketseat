@@ -1,0 +1,84 @@
+:root {
+    --body-bg-color: #FAF7FD;
+    --purple: #BB99DD;
+  }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--body-bg-color);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+main {
+    text-align: center;
+}
+
+.links {
+    text-align: center;
+  }
+
+.links a {
+    border: 2px solid var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    width: 326px;
+    height: 49px;
+    margin-bottom: 12px;
+    border-radius: 4px; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-image {
+    width: 98%;
+    height: 98%;
+    border-radius: 50%;
+    
+}
+
+.profile-ellipse {
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+    border: 2px solid var(--purple);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(196, 196, 196, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    margin-top: 30px;
+    margin-buttom: 50px;
+}
+
+.user-name {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: var(--purple);
+  }
+
+.social {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.social a {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.social img {
+    width: 24px;
+    height: 24px;
+}
