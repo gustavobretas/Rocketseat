@@ -1,0 +1,14 @@
+{
+  "name": "fundamentos-nodejs",
+  "version": "1.0.0",
+  "description": "Fundamento do NodeJS",
+  "main": "src/index.js",
+  "author": "Rocketseat",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
