@@ -70,6 +70,18 @@ app.get('/account', (request, response) => {
     return response.send(customer);
 });
 
+app.delete('/account', (request, response) => {
+    const { customer } = request;
+    
+    if (getBalance(customer.statement) != 0) {
+        return response.status(400).json({ error: "Account with balance!" });
+    }
+
+    customers.splice(customer, 1);
+
+    return response.status(200).json(customers);
+});
+
 app.get('/statement', (request, response) => {
     const { customer } = request;
 
