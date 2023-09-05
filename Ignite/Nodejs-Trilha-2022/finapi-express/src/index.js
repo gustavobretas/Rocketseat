@@ -64,6 +64,12 @@ app.put('/account', (request, response) => {
     return response.status(201).send({ message: "Account Updated!" });
 });
 
+app.get('/account', (request, response) => {
+    const { customer } = request;
+    
+    return response.send(customer);
+});
+
 app.get('/statement', (request, response) => {
     const { customer } = request;
 
