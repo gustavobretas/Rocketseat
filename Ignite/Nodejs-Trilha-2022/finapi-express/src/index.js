@@ -60,6 +60,22 @@ app.get('/statement', (request, response) => {
     return response.json(customer.statement);
 });
 
+app.get('/statement/date', (request, response) => {
+    const { customer } = request;
+
+    const { date } = request.query;
+
+    if (!date) {
+        return response.status(400).json({ error: "Invalid date!" });
+    };
+
+    const statement = customer.statement.filter((statement) => {
+        return statement.created_at >= new Date(date + " 00:00") && statement.created_at <= new Date(date + " 23:59");
+    });
+
+    return response.json(statement);
+});
+
 app.post('/deposit', (request, response) => {
     const { description, amount } = request.body;
 
