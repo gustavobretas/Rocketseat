@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { CreateSpecificationService } from '../services/CreateSpecificationService';
+import { CreateSpecificationUseCase } from './CreateSpecificationUseCase';
 
 class CreateSpecificationController {
-  constructor(private createSpecificationService: CreateSpecificationService) {}
+  constructor(private createSpecificationService: CreateSpecificationUseCase) {}
 
   handle(request: Request, response: Response): Response {
     const { name, description } = request.body;
