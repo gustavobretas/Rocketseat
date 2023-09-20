@@ -1,0 +1,20 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Introduction to S.O.L.I.D",
+        "description": "This is an API documentation for a progran that I made to learn about S.O.L.I.D principles.",
+        "version": "1.0.0",
+        "contact": {
+            "name": "SOLID",
+            "email": ""
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "termsOfService": "http://swagger.io/terms/",
+        "paths": {
+            
+        }
+    }
+}
