@@ -9,3 +9,19 @@ Content-Type: application/json
 ###
 GET http://localhost:3333/categories HTTP/1.1 
 Content-Type: application/json
+
+###
+POST http://localhost:3333/categories/import HTTP/1.1
+Content-Type: multipart/form-data; boundary=---011000010111000001101001
+User-Agent: insomnia/2023.5.8
+Host: localhost:3333
+Content-Length: 171
+
+-----011000010111000001101001
+Content-Disposition: form-data; name="file"; filename="import_categories.csv"
+Content-Type: text/csv
+
+< ./import_categories.csv
+-----011000010111000001101001--
+
+###
