@@ -7,14 +7,98 @@
         "contact": {
             "name": "SOLID",
             "email": ""
-        },
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        },
-        "termsOfService": "http://swagger.io/terms/",
-        "paths": {
-            
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "sumary": "Create a new User",
+                "description": "Create a new User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "John Doe",
+                                    "email": "john.doe@example.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success!"
+                    },
+                    "400": {
+                        "description": "User Already Exists!"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "sumary": "List all Users",
+                "description": "List all Users",
+                "headers": {
+                    "name": "user_id",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "uuid"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "timestamp"
+                                            },
+                                            "updated_at": {
+                                                "type": "timestamp"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Access Denied!"
+                    }
+                }
+            }
         }
     }
 }
