@@ -53,13 +53,17 @@
                 ],
                 "sumary": "List all Users",
                 "description": "List all Users",
-                "headers": {
-                    "name": "user_id",
-                    "schema": {
+                "parameters": [
+                    {
+                      "in": "header",
+                      "name": "user_id",
+                      "schema": {
                         "type": "string",
                         "format": "uuid"
+                      },
+                      "required": true
                     }
-                },
+                  ],
                 "responses": {
                     "200": {
                         "description": "Success!",
@@ -71,22 +75,31 @@
                                         "type": "object",
                                         "properties": {
                                             "id": {
-                                                "type": "uuid"
+                                                "type": "string",
+                                                "format": "uuid"
                                             },
                                             "name": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "example": "John Doe"
                                             },
                                             "admin": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "default": false
                                             },
                                             "email": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "john.doe@example.dev"
                                             },
                                             "created_at": {
-                                                "type": "timestamp"
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
                                             },
                                             "updated_at": {
-                                                "type": "timestamp"
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
                                             }
                                         }
                                     }
@@ -96,6 +109,142 @@
                     },
                     "400": {
                         "description": "Access Denied!"
+                    }
+                }
+            }            
+        },
+        "/users/{user_id}/admin" :{
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "sumary": "List all Users",
+                "description": "List all Users",
+                "parameters": [
+                    {
+                      "in": "path",
+                      "description": "User ID",
+                      "name": "user_id",
+                      "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "required": true
+                    }
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "admin": {
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "john.doe@example.dev"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User Not Found!"
+                    }
+                }
+            }
+        },
+        "/users/{user_id}" :{
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "sumary": "Show User Profile",
+                "description": "Show User Profile",
+                "parameters": [
+                    {
+                      "in": "path",
+                      "description": "User ID",
+                      "name": "user_id",
+                      "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "required": true
+                    }
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": { 
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "John Doe"
+                                            },
+                                            "admin": {
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "format": "email",
+                                                "example": "john.doe@example.dev"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-09-21T14:30:00Z"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User Not Found!"
                     }
                 }
             }
